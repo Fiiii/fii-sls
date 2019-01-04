@@ -8,23 +8,6 @@ jobs:
   test:
     <<: *default_environment
     steps:
-      - run: yarn test
-
-  deploy_dev:
-    <<: *default_environment
-    steps:
-      - checkout
-      - restore_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - attach_workspace:
-          at: workspace
-      - run: >
-             yarn global add serverless &&
-             yarn deploy
-
-  install_dependencies:
-    <<: *default_environment
-    steps:
       - checkout
       - restore_cache:
           name: Restore Yarn Package Cache
@@ -38,15 +21,26 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+      - run: yarn test
+
+  deploy_dev:
+    <<: *default_environment
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - attach_workspace:
+          at: workspace
+      - run: >
+             yarn global add serverless &&
+             yarn &&
+             yarn deploy
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - install_dependencies
-      - test:
-          requires:
-            - install_dependencies
+      - test
       - deploy_dev:
           requires:
             - test
