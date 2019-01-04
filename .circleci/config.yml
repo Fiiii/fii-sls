@@ -1,0 +1,44 @@
+default_environment: &default_environment
+    docker:
+      - image: circleci/node:8.10
+    working_directory: ~/fii-sls
+
+version: 2
+jobs:
+  test:
+    <<: *default_environment
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.json" }}
+      - run:
+          name: yarn-install
+          command: 'yarn'
+      - save_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.json" }}
+          paths:
+          - ./node_modules
+      - run: npm run test:ci
+
+  deploy_dev:
+    <<: *default_environment
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.json" }}
+      - attach_workspace:
+          at: workspace
+      - run: yarn deploy
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test
+      - deploy_dev:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master
