@@ -14,6 +14,7 @@
     "__BASENAME__": false
   },
   "rules": {
+    "class-methods-use-this": "off",
     "space-before-function-paren": [
       "error",
       {
