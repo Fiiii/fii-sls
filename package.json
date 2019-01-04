@@ -1,0 +1,9 @@
+{
+  "name": "fii-sls",
+  "version": "1.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "serverless-webpack": "^5.2.0",
+    "webpack": "^4.28.3"
+  }
+}
