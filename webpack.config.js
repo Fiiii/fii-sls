@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const slsw = require('serverless-webpack')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: slsw.lib.entries,
@@ -13,7 +14,7 @@ module.exports = {
       debug: false
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
+    new UglifyJsPlugin({
       compress: true,
       mangle: process.env.NODE_ENV === 'production',
       beautify: process.env.NODE_ENV !== 'production',
