@@ -35,13 +35,7 @@ module.exports = {
         query: {
           presets: [
             [
-              'env',
-              {
-                target: { node: 8.10 }, // Node version on AWS Lambda
-                useBuiltIns: true,
-                modules: false,
-                loose: true
-              }
+              '@babel/preset-env'
             ]
           ]
         }
