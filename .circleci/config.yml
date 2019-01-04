@@ -28,7 +28,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.json" }}
+          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - attach_workspace:
           at: workspace
       - run: yarn deploy
