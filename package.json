@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "eslint": "eslint ./src"
+    "eslint": "eslint ./src",
+    "deploy": "serverless deploy --stage $STAGE",
+    "test": "export NODE_ENV=test && jest --env=node"
   },
   "dependencies": {
     "aurelia-dependency-injection": "^1.4.2",
