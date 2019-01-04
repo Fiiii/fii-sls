@@ -10,15 +10,18 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.json" }}
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
-          name: yarn-install
-          command: 'yarn'
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
       - save_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.json" }}
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-          - ./node_modules
-      - run: yarn test:ci
+            - ~/.cache/yarn
+      - run: yarn test
 
   deploy_dev:
     <<: *default_environment
