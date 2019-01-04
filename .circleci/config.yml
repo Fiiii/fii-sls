@@ -33,6 +33,7 @@ jobs:
           at: workspace
       - run: >
              yarn global add serverless &&
+             yarn &&
              yarn deploy
 
 workflows:
