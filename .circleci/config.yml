@@ -31,7 +31,9 @@ jobs:
           key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - attach_workspace:
           at: workspace
-      - run: yarn deploy
+      - run: >
+             yarn global add serverless
+             yarn deploy
 
 workflows:
   version: 2
