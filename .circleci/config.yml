@@ -44,7 +44,7 @@ workflows:
   build_and_test:
     jobs:
       - install_dependencies
-      - test
+      - test:
           requires:
             - install_dependencies
       - deploy_dev:
