@@ -1,6 +1,6 @@
 const webpack = require('webpack')
 const slsw = require('serverless-webpack')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   entry: slsw.lib.entries,
