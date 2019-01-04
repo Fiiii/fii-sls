@@ -33,14 +33,26 @@ jobs:
           at: workspace
       - run: >
              yarn global add serverless &&
-             yarn &&
              yarn deploy
+
+  install_dependencies:
+    <<: *default_environment
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - attach_workspace:
+          at: workspace
+      - run:
+          name: Install Dependencies
+          command: yarn
 
 workflows:
   version: 2
   build_and_test:
     jobs:
       - test
+      - install_dependencies
       - deploy_dev:
           requires:
             - test
