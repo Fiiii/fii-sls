@@ -6,7 +6,7 @@ provider:
 
 functions:
   hello:
-    handler: src/hadnlers/authorizer/index.default
+    handler: src/handlers/authorizer/index.default
 
 plugins:
   - serverless-webpack
