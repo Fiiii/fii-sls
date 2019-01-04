@@ -5,6 +5,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 module.exports = {
   entry: slsw.lib.entries,
   target: 'node',
+  mode: 'development',
   externals: [
     /aws-sdk/
   ],
@@ -15,13 +16,14 @@ module.exports = {
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new UglifyJsPlugin({
-      compress: true,
-      mangle: process.env.NODE_ENV === 'production',
-      beautify: process.env.NODE_ENV !== 'production',
-      output: {
-        comments: process.env.NODE_ENV !== 'production'
+      cache: true,
+      parallel: true,
+      uglifyOptions: {
+        compress: false,
+        ecma: 6,
+        mangle: true
       },
-      sourceMap: false
+      sourceMap: true
     })
   ],
   module: {
