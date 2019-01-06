@@ -33,7 +33,9 @@ jobs:
           at: workspace
       - run:
           name: Install sls globally
-          command: sudo npm i -g serverless
+          command: |
+            sudo chown -R $USER:$(id -gn $USER) /root/.config
+            sudo npm i -g serverless
       - run:
           name: Deploy dev
           command: serverless deploy -s dev
