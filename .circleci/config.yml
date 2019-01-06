@@ -20,7 +20,7 @@ jobs:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.cache/yarn
+            - ./node_modules
       - run: yarn test
 
   deploy_dev:
@@ -33,6 +33,7 @@ jobs:
           at: workspace
       - run: >
              yarn global add serverless &&
+             yarn &&
              export STAGE=dev &&
              yarn deploy
 
