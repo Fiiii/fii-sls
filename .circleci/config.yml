@@ -31,9 +31,12 @@ jobs:
           key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - attach_workspace:
           at: workspace
-      - run: >
-             yarn global add serverless &&
-             sls deploy dev
+        - run:
+            name: Install sls globally
+            command: yarn global add serverless
+        - run:
+            name: Deploy dev
+            command: sls deploy -s dev
 
 workflows:
   version: 2
