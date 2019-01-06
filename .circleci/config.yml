@@ -15,7 +15,9 @@ jobs:
             - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
-          command: yarn && npm install serverless -g
+          command: |
+            sudo npm i -g serverless
+            yarn
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
@@ -33,7 +35,7 @@ jobs:
           at: workspace
       - run:
           name: Install sls globally
-          command: yarn global add serverless
+          command: yarn add serverless
       - run:
           name: Deploy dev
           command: serverless deploy -s dev
