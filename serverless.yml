@@ -1,8 +1,18 @@
-service: aws-nodejs
+service:
+  name: ${self:custom.serviceName}
+  awsKmsKeyArn: ${self:custom.kmsKeyArn}
 
 provider:
   name: aws
   runtime: nodejs8.10
+  environment:
+    secret: ${s3:${self:custom.serviceName}-${opt:stage}-secrets/servicePassword}
+    foobar: ${s3:${self:custom.serviceName}-${opt:stage}-secrets/foobarKey}
+
+custom:
+  serviceName: fii-sls
+  accountId: ${env:AWS_ACCOUNT_ID}
+  kmsKeyArn: ${env:AWS_KMS_KEY_ARN}
 
 functions:
   hello:
