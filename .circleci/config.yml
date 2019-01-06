@@ -34,7 +34,7 @@ jobs:
       - run:
           name: Deploy dev
           command: |
-            sudo npm i -g serverless
+            npm i -g serverless
             serverless deploy -s dev
 
 workflows:
