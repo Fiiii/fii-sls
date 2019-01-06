@@ -33,9 +33,7 @@ jobs:
           at: workspace
       - run: >
              yarn global add serverless &&
-             yarn &&
-             export STAGE=dev &&
-             yarn deploy
+             sls deploy dev
 
 workflows:
   version: 2
