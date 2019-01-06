@@ -32,13 +32,10 @@ jobs:
       - attach_workspace:
           at: workspace
       - run:
-          name: Install sls globally
-          command: |
-            sudo chown -R $USER:$(id -gn $USER) /root/.config
-            sudo npm i -g serverless
-      - run:
           name: Deploy dev
-          command: serverless deploy -s dev
+          command: |
+            sudo npm i -g serverless
+            serverless deploy -s dev
 
 workflows:
   version: 2
