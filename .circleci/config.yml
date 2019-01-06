@@ -15,7 +15,7 @@ jobs:
             - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
-          command: yarn
+          command: yarn && yarn global add serverless
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
@@ -36,7 +36,7 @@ jobs:
           command: yarn global add serverless
       - run:
           name: Deploy dev
-          command: sls deploy -s dev
+          command: serverless deploy -s dev
 
 workflows:
   version: 2
