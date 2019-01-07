@@ -6,7 +6,7 @@ provider:
   name: aws
   runtime: nodejs8.10
   environment:
-    secret: ${s3:${self:custom.serviceName}-${opt:stage}-secrets/servicePassword}
+    secret: ${s3:${self:custom.serviceName}-${opt:stage}-secrets/secret123}
     foobar: ${s3:${self:custom.serviceName}-${opt:stage}-secrets/foobarKey}
 
 custom:
