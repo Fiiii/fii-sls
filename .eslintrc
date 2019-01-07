@@ -1,17 +1,9 @@
 {
   "parser": "babel-eslint",
-  "extends": "netflix",
   "env": {
     "node": true,
     "es6": true,
     "jest": true
-  },
-  "globals": {
-    "__DEV__": false,
-    "__PROD__": false,
-    "__DEBUG__": false,
-    "__COVERAGE__": false,
-    "__BASENAME__": false
   },
   "rules": {
     "class-methods-use-this": "off",
