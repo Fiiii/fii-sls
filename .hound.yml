@@ -1,4 +1,4 @@
 fail_on_violations: true
 javascript:
   enabled: true
-  linter: eslint
+  config_file: .eslintrc
