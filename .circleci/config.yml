@@ -38,6 +38,36 @@ jobs:
             export REGION=$AWS_REGION
             yarn deploy
 
+  deploy_integration:
+    <<: *default_environment
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - attach_workspace:
+          at: workspace
+      - run:
+          name: Deploy integration
+          command: |
+            export STAGE=integration
+            export REGION=$AWS_REGION
+            yarn deploy
+
+  deploy_production:
+    <<: *default_environment
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - attach_workspace:
+          at: workspace
+      - run:
+          name: Deploy production
+          command: |
+            export STAGE=production
+            export REGION=$AWS_REGION
+            yarn deploy
+
 workflows:
   version: 2
   build_and_test:
@@ -50,3 +80,17 @@ workflows:
             branches:
               only:
                 - master
+      - deploy_dev:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - integration
+      - deploy_dev:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - production
