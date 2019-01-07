@@ -4,7 +4,7 @@ export default class FooBarHandler extends BaseHandler {
   constructor(someService) {
     super()
     this.authService = someService
-    console.log('service:', someService)
+    console.log('Service:', someService)
   }
 
   async _process(event, context) {
