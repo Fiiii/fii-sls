@@ -10,6 +10,12 @@
  ---
  [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
  
+ `master - dev`[![CircleCI](https://circleci.com/gh/Fiiii/fii-sls/tree/master.svg?style=svg)](https://circleci.com/gh/Fiiii/fii-sls/tree/master)
+
+`integration` [![CircleCI](https://circleci.com/gh/Fiiii/fii-sls/tree/integration.svg?style=svg)](https://circleci.com/gh/Fiiii/fii-sls/tree/integration)
+
+`production` [![CircleCI](https://circleci.com/gh/Fiiii/fii-sls/tree/production.svg?style=svg)](https://circleci.com/gh/Fiiii/fii-sls/tree/production)
+
  ---
  ### Clone 🙈
 
