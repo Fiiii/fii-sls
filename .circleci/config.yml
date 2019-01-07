@@ -12,13 +12,13 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - dependency-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
           command: yarn
       - save_cache:
           name: Save Yarn Package Cache
-          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - ./node_modules
       - run: yarn test
@@ -28,14 +28,16 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - attach_workspace:
           at: workspace
       - run:
           name: Deploy dev
           command: |
-            npm i -g serverless
-            serverless deploy -s dev
+            export STAGE=dev
+            export NODE_ENV=$STG_NODE_ENV
+            export REGION=$AWS_REGION
+            yarn deploy
 
 workflows:
   version: 2
