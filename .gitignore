@@ -8,5 +8,5 @@ jspm_packages
 # Optional npm cache directory
 .npm
 
-envvars.local.sh
+envs.sh
 npm-debug*
