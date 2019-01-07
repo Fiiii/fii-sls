@@ -8,7 +8,9 @@
 </p>
 
  ---
-
+ [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
+ 
+ ---
  ### Clone 🙈
 
  - Clone this repo to your local machine using `git clone https://github.com/Fiiii/fii-sls.git`
