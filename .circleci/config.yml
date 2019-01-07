@@ -80,14 +80,14 @@ workflows:
             branches:
               only:
                 - master
-      - deploy_dev:
+      - deploy_integration:
           requires:
             - test
           filters:
             branches:
               only:
                 - integration
-      - deploy_dev:
+      - deploy_production:
           requires:
             - test
           filters:
