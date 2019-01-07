@@ -35,7 +35,6 @@ jobs:
           name: Deploy dev
           command: |
             export STAGE=dev
-            export NODE_ENV=$STG_NODE_ENV
             export REGION=$AWS_REGION
             yarn deploy
 
