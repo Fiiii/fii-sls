@@ -11,4 +11,5 @@ jspm_packages
 envs.sh
 npm-debug*
 
+env.yml
 .env

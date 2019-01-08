@@ -1,19 +1,22 @@
 service:
   name: ${self:custom.serviceName}
-  awsKmsKeyArn: ${self:custom.kmsKeyArn}
 
 provider:
   name: aws
   runtime: nodejs8.10
   environment:
-    secret: ${s3:${self:custom.serviceName}-${self:custom.stage}-secrets/servicePassword}
-    foobar: ${s3:${self:custom.serviceName}-${self:custom.stage}-secrets/foobarKey}
+    foobarKey: ${file(${self:custom.secrets}).foobarKey}
 
 custom:
   serviceName: fii-sls
-  stage: ${opt:stage, file(./config/envVars.js):getEnvVariables.STAGE}
-  accountId: ${file(./config/envVars.js):getEnvVariables.AWS_ACCOUNT_ID}
-  kmsKeyArn: ${file(./config/envVars.js):getEnvVariables.AWS_KMS_KEY_ARN}
+  stage: ${opt:stage, self:custom.defaultStage}
+  accountId: ${file(${self:custom.secrets}).AWS_ACCOUNT_ID}
+  secrets: ${s3:${self:custom.serviceName}-${self:custom.stage}-secrets/env.yml}
+  defaultStage: dev-1
+  stages:
+    - ${opt:stage}
+    - integration
+    - production
 
 functions:
   hello:
