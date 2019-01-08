@@ -6,13 +6,15 @@ provider:
   name: aws
   runtime: nodejs8.10
   environment:
-    secret: ${s3:${self:custom.serviceName}-${opt:stage}-secrets/secret123}
-    foobar: ${s3:${self:custom.serviceName}-${opt:stage}-secrets/foobarKey}
+    secret: ${file(./config/envVars.js):getEnvVariables.FOO}
+    foobar: ${file(./config/envVars.js):getEnvVariables.BAR}
+
+# ${s3:${self:custom.serviceName}-${opt:stage}-secrets/
 
 custom:
   serviceName: fii-sls
-  accountId: ${env:AWS_ACCOUNT_ID}
-  kmsKeyArn: ${env:AWS_KMS_KEY_ARN}
+  accountId: ${file(./config/envVars.js):getEnvVariables.AWS_ACCOUNT_ID}
+  kmsKeyArn: ${file(./config/envVars.js):getEnvVariables.AWS_KMS_KEY_ARN}
 
 functions:
   hello:
@@ -20,3 +22,4 @@ functions:
 
 plugins:
   - serverless-webpack
+  - serverless-offline
