@@ -13,6 +13,7 @@ export function init(handlerName, container, configureContainer) {
       const response = await handlerInvoker(event, context, handlerName, container)
 
       console.log('response', response)
+      console.log('env', process.env.secret)
       cb(null, process.env.servicePassword)
     } catch (err) {
       cb(err, null)

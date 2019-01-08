@@ -8,6 +8,7 @@ if (result.error) {
 console.log(result.parsed)
 
 module.exports.getEnvVariables = () => ({
+  STAGE: process.env.STAGE,
   FOO: process.env.FOO,
   BAR: process.env.BAR,
   AWS_ACCOUNT_ID: process.env.AWS_ACCOUNT_ID,

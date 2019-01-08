@@ -6,13 +6,12 @@ provider:
   name: aws
   runtime: nodejs8.10
   environment:
-    secret: ${file(./config/envVars.js):getEnvVariables.FOO}
-    foobar: ${file(./config/envVars.js):getEnvVariables.BAR}
-
-# ${s3:${self:custom.serviceName}-${opt:stage}-secrets/
+    secret: ${s3:${self:custom.serviceName}-${self:custom.stage}-secrets/servicePassword}
+    foobar: ${s3:${self:custom.serviceName}-${self:custom.stage}-secrets/foobarKey}
 
 custom:
   serviceName: fii-sls
+  stage: ${opt:stage, file(./config/envVars.js):getEnvVariables.STAGE}
   accountId: ${file(./config/envVars.js):getEnvVariables.AWS_ACCOUNT_ID}
   kmsKeyArn: ${file(./config/envVars.js):getEnvVariables.AWS_KMS_KEY_ARN}
 
