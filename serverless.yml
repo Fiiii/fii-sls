@@ -1,18 +1,22 @@
 service:
   name: ${self:custom.serviceName}
-  awsKmsKeyArn: ${self:custom.kmsKeyArn}
 
 provider:
   name: aws
   runtime: nodejs8.10
   environment:
-    secret: ${s3:${self:custom.serviceName}-${opt:stage}-secrets/secret123}
-    foobar: ${s3:${self:custom.serviceName}-${opt:stage}-secrets/foobarKey}
+    foobarKey: ${file(${self:custom.secrets}).foobarKey}
 
 custom:
   serviceName: fii-sls
-  accountId: ${env:AWS_ACCOUNT_ID}
-  kmsKeyArn: ${env:AWS_KMS_KEY_ARN}
+  stage: ${opt:stage, self:custom.defaultStage}
+  accountId: ${file(${self:custom.secrets}).AWS_ACCOUNT_ID}
+  secrets: ${s3:${self:custom.serviceName}-${self:custom.stage}-secrets/env.yml}
+  defaultStage: dev-1
+  stages:
+    - ${opt:stage}
+    - integration
+    - production
 
 functions:
   hello:
@@ -20,3 +24,4 @@ functions:
 
 plugins:
   - serverless-webpack
+  - serverless-offline
