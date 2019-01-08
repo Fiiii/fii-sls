@@ -6,6 +6,7 @@
     "eslint": "eslint ./src",
     "deploy": "export $(cat .env | xargs) && SLS_DEBUG=* serverless deploy --stage $STAGE --region $REGION --verbose",
     "deploy:local": "yarn deploy",
+    "deploy:stg": "yarn deploy --stage $STAGE --region $REGION --verbose",
     "test": "export NODE_ENV=test && jest --env=node"
   },
   "dependencies": {
