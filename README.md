@@ -8,19 +8,77 @@
 </p>
 
  ---
+ [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
 
- ### Clone 🙈
+ `master - dev`[![CircleCI](https://circleci.com/gh/Fiiii/fii-sls/tree/master.svg?style=svg)](https://circleci.com/gh/Fiiii/fii-sls/tree/master)
 
- - Clone this repo to your local machine using `git clone https://github.com/Fiiii/fii-sls.git`
+`integration` [![CircleCI](https://circleci.com/gh/Fiiii/fii-sls/tree/integration.svg?style=svg)](https://circleci.com/gh/Fiiii/fii-sls/tree/integration)
 
- ---
+`production` [![CircleCI](https://circleci.com/gh/Fiiii/fii-sls/tree/production.svg?style=svg)](https://circleci.com/gh/Fiiii/fii-sls/tree/production)
+
 
  ### Workflow 🙉
 
- * AWS master account should create dedicated environment for each of developer
-* Each developer should obtain `AWS_ACCOUNT_ID`, `AWS_KMS_KEY_ARN`
+* AWS master account should create dedicated environment for each of developer
 * On local machines `STAGE` equals developer github name it allows us to work on 'containerized' cloud environments
 
- TBC.
-
  ---
+
+## Installation
+
+### Clone
+- Clone this repo to your local machine using `git clone https://github.com/Fiiii/fii-sls.git`
+> or
+- By using globally installed serverless:
+```shell
+$ yarn
+$ yarn global add serverless
+$ sls install https://github.com/Fiiii/fii-sls.git
+```
+
+### Setup
+
+> create proper env file by using
+```shell
+$ cp ./config/.env.example ./config/.env
+```
+- Inside `.env` provide your private stage name that you will use for developing
+
+> install dependencies and sls globally
+```shell
+$ yarn
+$ yarn global add serverless
+```
+
+> now you can play with app by running
+```shell
+$ yarn offline
+```
+
+---
+
+### Environments
+
+## Add new env
+```shell
+$ yarn add:env
+```
+
+## Get env by key
+```shell
+$ yarn get:env
+```
+
+---
+
+### Troubleshooting
+
+> it means that probably ssm value doesnt exists in ssm service
+```shell
+  ##########################################################################################
+  # 2505: 4 of 5 promises have settled
+  # 2505: 1 unsettled promises:
+  # 2505:   ssm:/project_name/dev-name/sample_key waited on by: ${ssm:/project_name/dev-name/sample_key}
+  # This can result from latent connections but may represent a cyclic variable dependency
+  ##########################################################################################
+```

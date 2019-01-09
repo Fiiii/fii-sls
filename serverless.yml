@@ -1,22 +1,30 @@
 service:
   name: ${self:custom.serviceName}
-  awsKmsKeyArn: ${self:custom.kmsKeyArn}
 
 provider:
   name: aws
   runtime: nodejs8.10
   environment:
-    secret: ${s3:${self:custom.serviceName}-${opt:stage}-secrets/secret123}
-    foobar: ${s3:${self:custom.serviceName}-${opt:stage}-secrets/foobarKey}
+    SECRET1: ${ssm:/${self:custom.serviceName}/${env:STAGE}/onekey}
 
 custom:
   serviceName: fii-sls
-  accountId: ${env:AWS_ACCOUNT_ID}
-  kmsKeyArn: ${env:AWS_KMS_KEY_ARN}
+  stage: ${opt:stage, self:custom.defaultStage}
+  defaultStage: dev
+  stages:
+    - ${opt:stage}
+    - dev
+    - integration
+    - production
 
 functions:
   hello:
     handler: src/handlers/authorizer/index.default
+    events:
+      - http:
+          path: /slshello
+          method: get
 
 plugins:
   - serverless-webpack
+  - serverless-offline
