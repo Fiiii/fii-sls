@@ -7,7 +7,8 @@
     "deploy": "export $(cat .env | xargs) && SLS_DEBUG=* serverless deploy --stage $STAGE --region $REGION --verbose",
     "deploy:local": "yarn deploy",
     "deploy:stg": "yarn deploy --stage $STAGE --region $REGION --verbose",
-    "test": "export NODE_ENV=test && jest --env=node"
+    "test": "export NODE_ENV=test && jest --env=node",
+    "offline": "export $(cat .env | xargs) && serverless offline start"
   },
   "dependencies": {
     "aurelia-dependency-injection": "^1.4.2",

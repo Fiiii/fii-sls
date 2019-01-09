@@ -5,22 +5,25 @@ provider:
   name: aws
   runtime: nodejs8.10
   environment:
-    foobarKey: ${file(${self:custom.secrets}).foobarKey}
+    SECRET1: ${ssm:/${self:custom.serviceName}/${env:STAGE}/onekey}
 
 custom:
   serviceName: fii-sls
   stage: ${opt:stage, self:custom.defaultStage}
-  accountId: ${file(${self:custom.secrets}).AWS_ACCOUNT_ID}
-  secrets: ${s3:${self:custom.serviceName}-${self:custom.stage}-secrets/env.yml}
-  defaultStage: dev-1
+  defaultStage: dev
   stages:
     - ${opt:stage}
+    - dev
     - integration
     - production
 
 functions:
   hello:
     handler: src/handlers/authorizer/index.default
+    events:
+      - http:
+          path: /slshello
+          method: get
 
 plugins:
   - serverless-webpack
