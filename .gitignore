@@ -8,6 +8,9 @@ jspm_packages
 # Optional npm cache directory
 .npm
 
+# Webpack build
+.webpack
+
 envs.sh
 npm-debug*
 
