@@ -1,4 +1,3 @@
-import 'babel-polyfill'
 import 'aurelia-polyfills'
 import handlerInvoker from './handlerInvoker'
 
@@ -13,9 +12,9 @@ export function init(handlerName, container, configureContainer) {
       const response = await handlerInvoker(event, context, handlerName, container)
 
       console.log('response', response)
-      cb(null, process.env.servicePassword)
+      return 'INIT AUTH'
     } catch (err) {
-      cb(err, null)
+      return err
     }
   }
 }
