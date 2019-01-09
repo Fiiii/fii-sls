@@ -28,6 +28,13 @@
 
 ### Clone
 - Clone this repo to your local machine using `git clone https://github.com/Fiiii/fii-sls.git`
+> or
+- By using globally installed serverless:
+```shell
+$ yarn
+$ yarn global add serverless
+$ sls install https://github.com/Fiiii/fii-sls.git
+```
 
 ### Setup
 
@@ -49,3 +56,29 @@ $ yarn offline
 ```
 
 ---
+
+### Environments
+
+## Add new env
+```shell
+$ yarn add:env
+```
+
+## Get env by key
+```shell
+$ yarn get:env
+```
+
+---
+
+### Troubleshooting
+
+> it means that probably ssm value doesnt exists in ssm service
+```shell
+  ##########################################################################################
+  # 2505: 4 of 5 promises have settled
+  # 2505: 1 unsettled promises:
+  # 2505:   ssm:/project_name/dev-name/sample_key waited on by: ${ssm:/project_name/dev-name/sample_key}
+  # This can result from latent connections but may represent a cyclic variable dependency
+  ##########################################################################################
+```
