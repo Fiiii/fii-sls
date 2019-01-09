@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "eslint": "eslint ./src",
-    "deploy": "export $(cat ./config/.env | xargs) && SLS_DEBUG=* serverless deploy --stage $STAGE --region $REGION --verbose",
-    "deploy:local": "yarn deploy",
+    "deploy": "SLS_DEBUG=* serverless deploy --stage $STAGE --region $REGION --verbose",
+    "deploy:local": "export $(cat ./config/.env | xargs) && SLS_DEBUG=* serverless deploy --stage $STAGE --region $REGION --verbose",
     "deploy:stg": "yarn deploy --stage $STAGE --region $REGION --verbose",
     "test": "export NODE_ENV=test && jest --env=node",
     "offline": "export $(cat ./config/.env | xargs) && serverless offline start"

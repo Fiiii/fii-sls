@@ -36,7 +36,7 @@ jobs:
           command: |
             export STAGE=dev
             export REGION=$AWS_REGION
-            yarn deploy:stg
+            yarn deploy
 
   deploy_integration:
     <<: *default_environment
@@ -51,7 +51,7 @@ jobs:
           command: |
             export STAGE=integration
             export REGION=$AWS_REGION
-            yarn deploy:stg
+            yarn deploy
 
   deploy_production:
     <<: *default_environment
@@ -66,7 +66,7 @@ jobs:
           command: |
             export STAGE=production
             export REGION=$AWS_REGION
-            yarn deploy:stg
+            yarn deploy
 
 workflows:
   version: 2
