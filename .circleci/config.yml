@@ -41,7 +41,7 @@ jobs:
             echo $AWS_SECRET_ACCESS_KEY
             echo $AWS_PROFILE
             SLS_DEBUG=* serverless config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY --profile $AWS_PROFILE
-            SLS_DEBUG=* serverless deploy --stage $STAGE --region $REGION --verbose
+            SLS_DEBUG=* serverless deploy --stage $STAGE --region $REGION --aws-profile $AWS_PROFILE
 
   deploy_integration:
     <<: *default_environment
