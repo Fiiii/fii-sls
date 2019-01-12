@@ -36,7 +36,7 @@ jobs:
           command: |
             export STAGE=dev
             export REGION=$AWS_REGION
-            yarn deploy
+            SLS_DEBUG=* sls deploy --stage $STAGE --region $REGION --verbose
 
   deploy_integration:
     <<: *default_environment
