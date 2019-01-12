@@ -12,15 +12,19 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - dependency-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - dependency-cache-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
           command: yarn
       - save_cache:
           name: Save Yarn Package Cache
-          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
-            - ./node_modules
+            - ~/fii-sls/node_modules
+      - persist_to_workspace:
+          root: ~/fii-sls
+          paths:
+            - node_modules
       - run: yarn test
 
   deploy_dev:
@@ -28,24 +32,24 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - attach_workspace:
-          at: workspace
+          at: ~/fii-sls
       - run:
           name: Deploy dev
           command: |
             export STAGE=dev
             export REGION=$AWS_REGION
-            SLS_DEBUG=* sls deploy --stage $STAGE --region $REGION --verbose
+            yarn deploy
 
   deploy_integration:
     <<: *default_environment
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - attach_workspace:
-          at: workspace
+          at: ~/fii-sls
       - run:
           name: Deploy integration
           command: |
@@ -58,9 +62,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
       - attach_workspace:
-          at: workspace
+          at: ~/fii-sls
       - run:
           name: Deploy production
           command: |
