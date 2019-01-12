@@ -4,6 +4,7 @@ service:
 provider:
   name: aws
   runtime: nodejs8.10
+  profile: ${env:PROFILE}
   environment:
     SECRET1: ${ssm:/${self:custom.serviceName}/${env:STAGE}/onekey}
 

@@ -8,9 +8,9 @@
     "deploy:local": "export $(cat ./config/.env | xargs) && SLS_DEBUG=* serverless deploy --stage $STAGE --region $REGION --verbose",
     "remove:stack": "export $(cat ./config/.env | xargs) && sls remove -s $STAGE",
     "test": "export NODE_ENV=test && jest --env=node",
-    "offline": "export $(cat ./config/.env | xargs) && serverless offline start",
+    "offline": "yarn pull:env && serverless offline start --stage $STAGE",
     "add:env": "./config/push-secret.sh",
-    "pull:env": "./config/pull-secret.sh"
+    "pull:env": "export $(cat ./config/.env | xargs)"
   },
   "dependencies": {
     "aurelia-dependency-injection": "^1.4.2",
