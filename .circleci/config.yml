@@ -1,6 +1,6 @@
 default_environment: &default_environment
     docker:
-      - image: circleci/node:8.10
+      - image: amaysim/serverless:1.30.3
     working_directory: ~/fii-sls
 
 version: 2
