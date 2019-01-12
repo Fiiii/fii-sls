@@ -38,7 +38,7 @@ jobs:
             export REGION=$AWS_REGION
             export PROFILE=$AWS_PROFILE
             serverless config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY --profile sls-deployer
-            yarn deploy
+            serverless deploy --stage $STAGE --region $REGION --verbose
 
   deploy_integration:
     <<: *default_environment
