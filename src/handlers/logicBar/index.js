@@ -1,7 +1,8 @@
-import { init } from '../../lib/initFunction'
-import { Container } from 'aurelia-dependency-injection'
-import FooBarHandler from './fooBarHandler'
+const handler = async (event) => {
+  try {
+  } catch (error) {
+    throw new Error(error)
+  }
+}
 
-export default init('FooBarHandler', new Container(), (container) => {
-  container.registerSingleton('FooBarHandler', FooBarHandler)
-})
+export default handler

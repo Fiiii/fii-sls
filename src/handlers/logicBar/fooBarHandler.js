@@ -1,10 +1,9 @@
 import BaseHandler from '../../lib/BaseHandler'
 
 export default class FooBarHandler extends BaseHandler {
-  constructor(someService) {
+  constructor() {
     super()
-    this.authService = someService
-    console.log('Service:', someService)
+    console.log('Service job')
   }
 
   async _process(event, context) {
