@@ -1,13 +1,17 @@
 service:
   name: ${self:custom.serviceName}
 
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
 provider:
   name: aws
   runtime: nodejs8.10
   region: ${env:REGION}
   profile: ${env:PROFILE}
-  environment:
-    SECRET1: ${ssm:/${self:custom.serviceName}/${env:STAGE}/onekey~true}
+  environments:
+    GLOBAL_SECRET: ${ssm:/${self:custom.serviceName}/${env:STAGE}/onekey~true}
 
 custom:
   serviceName: fii-sls
@@ -26,7 +30,5 @@ functions:
       - http:
           path: /slshello
           method: get
-
-plugins:
-  - serverless-webpack
-  - serverless-offline
+    environment:
+      HELLO_SECRET: ${ssm:/${self:custom.serviceName}/${env:STAGE}/onekey~true}
