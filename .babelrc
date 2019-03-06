@@ -1,17 +1,15 @@
 {
+  "plugins": [
+    "@babel/plugin-transform-runtime"
+  ],
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
         "targets": {
           "node": "8.10"
         }
       }
     ]
-  ],
-  "env": {
-    "test": {
-      "sourceMaps": "inline"
-    }
-  }
+  ]
 }
